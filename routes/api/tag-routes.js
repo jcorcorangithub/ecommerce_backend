@@ -51,15 +51,17 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  // update a tag's name by its `id` value
+  //const tagId = req.params.id;
+  //update a tag's name by its `id` value
+  console.log(req.body);
   try {
-    const tagData = await Tag.update({
+    const tagData = await Tag.update({tag_name: req.body.tag_name}, {
       where: {
         id: req.params.id
       }
     });
 
-    if (!categoryData) {
+    if (!tagData) {
       res.status(404).json({ message: 'No tagfound with this id!' });
       return;
     }
